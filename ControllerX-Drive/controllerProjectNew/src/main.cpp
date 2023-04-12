@@ -31,15 +31,64 @@ using namespace vex;
 // L1' and 'Button R1` are pressed, the functions will run.
 
 void whenControllerL1Pressed() {
-  ArmMotor.spin(forward);
+  //Forward Or Reverse
+  leftMotor.spin(forward);
+  rightMotor.spin(reverse);
   waitUntil(!Controller1.ButtonL1.pressing());
-  ArmMotor.stop();
+  rightMotor.stop();
+  leftMotor.stop();
 }
 
 void whenControllerL2Pressed() {
-  ArmMotor.spin(reverse);
+  //Forward or Reverse 
+  leftMotor2.spin(forward);
+  rightMotor2.spin(reverse);  
   waitUntil(!Controller1.ButtonL2.pressing());
-  ArmMotor.stop();
+  rightMotor2.stop();
+  leftMotor2.stop();
+}
+
+void whenControllerR1Pressed() {
+  //Left Or Right
+  leftMotor.spin(forward);
+  rightMotor2.spin(reverse);  
+  waitUntil(!Controller1.ButtonR2.pressing());
+  rightMotor2.stop();
+  leftMotor2.stop();
+}
+void whenControllerR2Pressed() {
+  //Forward or Reverse 
+  leftMotor2.spin(forward);
+  rightMotor2.spin(reverse);  
+  waitUntil(!Controller1.ButtonR1.pressing());
+  rightMotor2.stop();
+  leftMotor2.stop();
+}
+
+void whenControllerXPressed() {
+  //Forward or Reverse 
+  leftMotor2.spin(forward);
+  rightMotor2.spin(forward);  
+  leftMotor.spin(forward);
+  rightMotor.spin(forward);  
+  waitUntil(!Controller1.ButtonX.pressing());
+  rightMotor2.stop();
+  leftMotor2.stop();
+  leftMotor.stop();
+  rightMotor.stop();  
+}
+
+void whenControllerBPressed() {
+  //Forward or Reverse 
+  leftMotor2.spin(reverse);
+  rightMotor2.spin(reverse);  
+  leftMotor.spin(reverse);
+  rightMotor.spin(reverse);  
+  waitUntil(!Controller1.ButtonB.pressing());
+  rightMotor2.stop();
+  leftMotor2.stop();
+  leftMotor.stop();
+  rightMotor.stop();  
 }
 
 int main() {
@@ -47,26 +96,35 @@ int main() {
   vexcodeInit();
 
   // Set motor's brake mode and velocity
-  ArmMotor.setStopping(hold);
-  ClawMotor.setStopping(hold);
-  ArmMotor.setVelocity(30, percent);
-  ClawMotor.setVelocity(60, percent);
+  leftMotor2.setStopping(hold);
+  rightMotor2.setStopping(hold);
+  leftMotor.setStopping(hold);
+  rightMotor.setStopping(hold);
+  // ArmMotor.setVelocity(30, percent);
+  // ClawMotor.setVelocity(60, percent);
+  leftMotor2.setVelocity(30, percent);
+  rightMotor2.setVelocity(30, percent);
+  leftMotor.setVelocity(30, percent);
+  rightMotor.setVelocity(30, percent);
 
   // Method 1 - Using Callbacks
   // Register callbacks to controller button 'pressed' events.
   Controller1.ButtonL1.pressed(whenControllerL1Pressed);
   Controller1.ButtonL2.pressed(whenControllerL2Pressed);
-
-  // Method - 2 Inline-code
-  // Use a 'forever loop' to constantly check the controller's values.
-  while (true) {
-    if (Controller1.ButtonR1.pressing()) {
-      ClawMotor.spin(forward);
-    } else if (Controller1.ButtonR2.pressing()) {
-      ClawMotor.spin(reverse);
-    } else {
-      ClawMotor.stop();
-    }
-    wait(25, msec);
-  }
+  Controller1.ButtonR1.pressed(whenControllerR1Pressed);
+  Controller1.ButtonR2.pressed(whenControllerR2Pressed);
+  Controller1.ButtonB.pressed(whenControllerBPressed);
+  Controller1.ButtonX.pressed(whenControllerXPressed);
+//   // Method - 2 Inline-code
+//   // Use a 'forever loop' to constantly check the controller's values.
+//   while (true) {
+//     if (Controller1.ButtonR1.pressing()) {
+//       ClawMotor.spin(forward);
+//     } else if (Controller1.ButtonR2.pressing()) {
+//       ClawMotor.spin(reverse);
+//     } else {
+//       ClawMotor.stop();
+//     }
+//     wait(25, msec);
+//   }
 }
