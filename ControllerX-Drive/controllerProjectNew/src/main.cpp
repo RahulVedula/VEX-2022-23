@@ -91,6 +91,7 @@ void whenControllerBPressed() {
   rightMotor.stop();  
 }
 
+
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
@@ -115,6 +116,22 @@ int main() {
   Controller1.ButtonR2.pressed(whenControllerR2Pressed);
   Controller1.ButtonB.pressed(whenControllerBPressed);
   Controller1.ButtonX.pressed(whenControllerXPressed);
+//   while (true){
+//   if (Controller1.Axis1.position() > 0){
+//     whenControllerL2Pressed();
+//   }
+//   if (Controller1.Axis2.position() < 0){
+//     whenControllerL1Pressed();
+//   }
+// if (Controller1.Axis3.position() > 0){
+//     whenControllerR1Pressed();
+//   }
+//   if (Controller1.Axis4.position() < 0){
+//     whenControllerR2Pressed();
+//   }
+//   wait(25, msec);
+//   }
+
 //   // Method - 2 Inline-code
 //   // Use a 'forever loop' to constantly check the controller's values.
 //   while (true) {
