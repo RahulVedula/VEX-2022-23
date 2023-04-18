@@ -33,7 +33,7 @@ using namespace vex;
 void whenControllerL1Pressed() {
   //Forward Or Reverse
    leftMotor2.spin(reverse);
-  rightMotor2.spin(forwrd);  
+  rightMotor2.spin(forward);  
     leftMotor.spin(reverse);
   rightMotor.spin(forward);
   waitUntil(!Controller1.ButtonL1.pressing());
