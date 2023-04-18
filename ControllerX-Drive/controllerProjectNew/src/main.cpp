@@ -29,9 +29,12 @@ using namespace vex;
 // whenControllerL1Pressed and whenControllerL2Pressed callback functions are
 // registered to the contorller's button 'pressed' event. Whenever the 'Button
 // L1' and 'Button R1` are pressed, the functions will run.
+//Port 1/9 forward
+//port 2/10 go backwards
+//port 9/10 go left (thye go forward to make robot go left)
 
 void whenControllerL1Pressed() {
-  //Forward Or Reverse
+  //Forward
    leftMotor2.spin(reverse);
   rightMotor2.spin(forward);  
     leftMotor.spin(reverse);
@@ -44,7 +47,7 @@ void whenControllerL1Pressed() {
 }
 
 void whenControllerL2Pressed() {
-  //Forward or Reverse 
+  //Reverse 
   leftMotor2.spin(forward);
   rightMotor2.spin(reverse);  
     leftMotor.spin(forward);
@@ -57,13 +60,12 @@ void whenControllerL2Pressed() {
 }
 
 void whenControllerR1Pressed() {
-  //Left Or Right
-    //Forward or Reverse 
+  //LRight 
   leftMotor2.spin(reverse);
   rightMotor2.spin(reverse);
-   leftMotor.spin(reverse);
-  rightMotor2.spin(reverse); 
-  waitUntil(!Controller1.ButtonR2.pressing());
+   leftMotor.spin(forward);
+  rightMotor.spin(forward); 
+  waitUntil(!Controller1.ButtonR1.pressing());
   rightMotor2.stop();
   leftMotor2.stop();
   rightMotor.stop();
@@ -73,9 +75,9 @@ void whenControllerR2Pressed() {
   //Forward or Reverse 
   leftMotor2.spin(forward);
   rightMotor2.spin(forward);
-   leftMotor.spin(forward);
-  rightMotor2.spin(forward); 
-  waitUntil(!Controller1.ButtonR1.pressing());
+   leftMotor.spin(reverse);
+  rightMotor.spin(reverse); 
+  waitUntil(!Controller1.ButtonR2.pressing());
    rightMotor2.stop();
   leftMotor2.stop();
   rightMotor.stop();
@@ -125,16 +127,16 @@ int main() {
   leftMotor.setVelocity(60, percent);
   rightMotor.setVelocity(60, percent);
 
-  // Method 1 - Using Callbacks
-  // Register callbacks to controller button 'pressed' events.
+  //Method 1 - Using Callbacks
+  //Register callbacks to controller button 'pressed' events.
   Controller1.ButtonL1.pressed(whenControllerL1Pressed);
   Controller1.ButtonL2.pressed(whenControllerL2Pressed);
   Controller1.ButtonR1.pressed(whenControllerR1Pressed);
   Controller1.ButtonR2.pressed(whenControllerR2Pressed);
   Controller1.ButtonB.pressed(whenControllerBPressed);
   Controller1.ButtonX.pressed(whenControllerXPressed);
-//   while (true){
-//   if (Controller1.Axis1.position() > 0){
+  // Controller1.ButtonDown.pressed(whenControllerXPressed);
+//    if (Controller1.Axis1.position() > 0){
 //     whenControllerL2Pressed();
 //   }
 //   if (Controller1.Axis2.position() < 0){
@@ -146,8 +148,21 @@ int main() {
 //   if (Controller1.Axis4.position() < 0){
 //     whenControllerR2Pressed();
 //   }
-//   wait(25, msec);
-//   }
+// //  while (true){
+// //   if (Controller1.Axis1.position() > 0){
+// //     whenControllerL2Pressed();
+// //   }
+// //   if (Controller1.Axis2.position() < 0){
+// //     whenControllerL1Pressed();
+// //   }
+// // if (Controller1.Axis3.position() > 0){
+// //     whenControllerR1Pressed();
+// //   }
+// //   if (Controller1.Axis4.position() < 0){
+// //     whenControllerR2Pressed();
+// //   }
+// //   wait(25, msec);
+// //   }
 
 //   // Method - 2 Inline-code
 //   // Use a 'forever loop' to constantly check the controller's values.
