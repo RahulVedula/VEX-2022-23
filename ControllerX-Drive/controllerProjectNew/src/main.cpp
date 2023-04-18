@@ -32,9 +32,13 @@ using namespace vex;
 
 void whenControllerL1Pressed() {
   //Forward Or Reverse
-  leftMotor.spin(forward);
-  rightMotor.spin(reverse);
+   leftMotor2.spin(reverse);
+  rightMotor2.spin(forwrd);  
+    leftMotor.spin(reverse);
+  rightMotor.spin(forward);
   waitUntil(!Controller1.ButtonL1.pressing());
+  rightMotor2.stop();
+  leftMotor2.stop();
   rightMotor.stop();
   leftMotor.stop();
 }
@@ -43,9 +47,13 @@ void whenControllerL2Pressed() {
   //Forward or Reverse 
   leftMotor2.spin(forward);
   rightMotor2.spin(reverse);  
+    leftMotor.spin(forward);
+  rightMotor.spin(reverse);
   waitUntil(!Controller1.ButtonL2.pressing());
   rightMotor2.stop();
   leftMotor2.stop();
+  rightMotor.stop();
+  leftMotor.stop();
 }
 
 void whenControllerR1Pressed() {
