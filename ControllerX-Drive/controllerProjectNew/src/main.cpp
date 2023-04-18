@@ -58,19 +58,28 @@ void whenControllerL2Pressed() {
 
 void whenControllerR1Pressed() {
   //Left Or Right
-  leftMotor.spin(forward);
-  rightMotor2.spin(reverse);  
+    //Forward or Reverse 
+  leftMotor2.spin(reverse);
+  rightMotor2.spin(reverse);
+   leftMotor.spin(reverse);
+  rightMotor2.spin(reverse); 
   waitUntil(!Controller1.ButtonR2.pressing());
   rightMotor2.stop();
   leftMotor2.stop();
+  rightMotor.stop();
+  leftMotor.stop();
 }
 void whenControllerR2Pressed() {
   //Forward or Reverse 
   leftMotor2.spin(forward);
-  rightMotor2.spin(reverse);  
+  rightMotor2.spin(forward);
+   leftMotor.spin(forward);
+  rightMotor2.spin(forward); 
   waitUntil(!Controller1.ButtonR1.pressing());
-  rightMotor2.stop();
+   rightMotor2.stop();
   leftMotor2.stop();
+  rightMotor.stop();
+  leftMotor.stop();
 }
 
 void whenControllerXPressed() {
@@ -111,10 +120,10 @@ int main() {
   rightMotor.setStopping(hold);
   // ArmMotor.setVelocity(30, percent);
   // ClawMotor.setVelocity(60, percent);
-  leftMotor2.setVelocity(30, percent);
-  rightMotor2.setVelocity(30, percent);
-  leftMotor.setVelocity(30, percent);
-  rightMotor.setVelocity(30, percent);
+  leftMotor2.setVelocity(60, percent);
+  rightMotor2.setVelocity(60, percent);
+  leftMotor.setVelocity(60, percent);
+  rightMotor.setVelocity(60, percent);
 
   // Method 1 - Using Callbacks
   // Register callbacks to controller button 'pressed' events.
